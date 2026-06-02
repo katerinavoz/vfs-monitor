@@ -2,9 +2,7 @@ name: VFS Slot Monitor
 
 on:
   schedule:
-    # Каждые 5 минут (минимальный интервал GitHub Actions)
     - cron: '*/5 * * * *'
-  # Позволяет запустить вручную из интерфейса GitHub
   workflow_dispatch:
 
 jobs:
@@ -21,14 +19,10 @@ jobs:
         with:
           python-version: '3.12'
 
-      # Зависимостей нет — используем только стандартную библиотеку Python
-
       - name: Check VFS slots
         env:
-          VFS_EMAIL:        ${{ secrets.VFS_EMAIL }}
-          VFS_PASSWORD:     ${{ secrets.VFS_PASSWORD }}
-          TG_TOKEN:         ${{ secrets.TG_TOKEN }}
-          TG_CHAT_ID:       ${{ secrets.TG_CHAT_ID }}
-          VFS_COUNTRY_CODE: ${{ secrets.VFS_COUNTRY_CODE }}
-          VFS_COUNTRY_NAME: ${{ secrets.VFS_COUNTRY_NAME }}
+          VFS_EMAIL:    ${{ secrets.VFS_EMAIL }}
+          VFS_PASSWORD: ${{ secrets.VFS_PASSWORD }}
+          TG_TOKEN:     ${{ secrets.TG_TOKEN }}
+          TG_CHAT_ID:   ${{ secrets.TG_CHAT_ID }}
         run: python check_slots.py
